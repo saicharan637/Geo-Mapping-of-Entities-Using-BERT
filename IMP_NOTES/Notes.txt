@@ -1,0 +1,131 @@
+python reformatiing ..split by sentence
+how many tokens, words wiki, wikification
+algorithm - additional wiki words,
+tests newly model with testing tools bert comes with
+how are we gonnna put dataset and algorithm together
+fine-tune, test, produce model..repeat loop, wer'e not gonna get the 
+same results/accuracy
+first linked items ..in wikipedia
+synonmy test ()
+wikientries- squad doesn't test
+take model, compute similarity between car and parking , car and university,
+ predict which is the closest one to the model.
+wiki pages- 2 pages one mentions the other
+build good language model of the vocabulary in the corpus
+
+
+use pre-trained model and add wiki entries into it
+or run the model from scratch, pre-train with our data from scratch
+properties
+: word similarity
+
+more precise plan - next week , use whole wikipedia dataset..
+how to add words into bert, before fine tuning
+
+_____________________________________________________________________________________________
+
+wikiki links isnstead of words
+pre trainng on bert
+reddit - pre process
+
+wikipedai data
+5gb
+ runing pre traingn tool on data 
+doenst split 
+pre prcoess link name wiki tokenizer shouldnt split
+link name wiht actual kink sbut ina format tokenizer doesnt split
+rrun pre traingina dn get mofdel f..the pre trained model
+
+our data do fine tunnig tell tokenizer not split _underscore
+
+
+
+plan n next few stpes:
+
+donwlaod data,
+pre prcoessing with bert ..tokeizing but not spliting by underscore, pre traingin with data
+ dn fine tune on toher data set
+xml format
+
+pre train bert with wikipedai and fine tune wtih reddit
+
+gives vectors for each word ..fine tune gives context
+context create maps
+
+same data format
+
+
+two approaches to create model wiht wiki vectrs insirs:
+
+
+add each wiki word ad a new vector
+
+training run from scartch on an exisitng data set- overfit to the data ..using iwkipiedai data..whole wikipedia as xml files
+
+wikipedai every word is linked to toher wikipedia pages
+no need to run wikifier to get wikiliks, but need to process illinois to wiki_illinois _page number ...
+run pretraingn on this...overfit because wikipedia is not gigantic
+
+no need to add vecors..just fine tune with reddit where we get contextual part from fine tuning without problmes
+wiki_illinos_pageno..will already be inside language model
+
+____________________________________________________________
+wikifier -adding links
+from xml process the dat so that it has the same fomrat of reddit
+chuking problem
+
+adding extra wikifies words
+
+share link of approach the guy is talking about(ninad parikh)?
+
+write all about this in the plan report
+--which approach we're taking
+
+_____________________________________________________________________
+pre processing - tokenization/vocab learning
+final step - transfer learning/training on final data set
+Final outcome - create a vocab cluster based on texts from different geographical locations and map the clusters to the map locations
+build few clusters and Bert model which when trained on the final data will give a proper clustering of geographical seperation
+_____________________________________________________________________
+replace underscore with # or a word
+learn info abt new wiki words
+
+dont allow sequnece (tokens) to go acroos the boundary of the artiles(for eg articel has 300 words)
+
+
+bert vocab file - 30k words
+wiki words 150k words
+how can we add new words to the vocab of bert
+when u pre train- 
+
+explore the idea of using embeddings
+get out the embeding for words in bert vocab
+get wiki words and get bert mebeddings and get the cluster
+embeddings for wiki words
+
+get out unique wikified words and calculate the frequency counts/occurence 
+look at top few hundred occurences 
+check 10 wiki words and check in bert vocab and some of them are there and we can keep them
+wiki-newoykr-abfk...pick newyork and lokk in bert vocab
+
+see how many wiki words are acutally in bert
+3rd task start woking on embeddings get the embeddings out of bert
+
+
+dont remove spaces/punctuation marks
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+BERT works similarly to the Transformer encoder stack, 
+by taking a sequence of words as input which keep flowing up
+the stack from one encoder to the next, while new sequences are coming in.
+The final output for each sequence is a vector of 728 numbers in
+Base or 1024 in Large version.
+Contextual models instead generate a representation of each word that is based 
+on the other words in the sentence. 
+BERT, as a contextual model, captures these relationships in a bidirectional way.
+
+
+
+
+____________________________________________________________________________________________________________
+Token indices sequence length is longer than the specified maximum sequence length for this mode
+
+____________________________________________________________________________________________________________
+I'm using BERT for my Master's Thesis, and I need to create a custom vocabulary for the model. BERT uses WordPiece tokenization for pre-processing, but for some reason, libraries or code for creating a WordPiece vocabulary file seem hard to come by. For instance, the official repo, does not contain any code for learning a new WordPiece vocab. As this table from Google shows, there is no readily available pip package nor C++ library for creating WordPieces. The only thing I've come to find so far is this class from Neural Monekey, which is not a library I'm familiar with. Plus, the latter only seems to be a re-implementation of the tensor2tensor tokenizer.
+
+Does anyone know why Google is being so secretive about this specific technique, or where I can find a proper implementation? The original article is also rather vague in the explanation of how the WordPiece model is trained, making it hard to implement the model myself correctly.
+We have used the SentencePiece tokenizer for this purpose, should probably work for your purposes.
+Thank you! I was looking at SentencePiece, but struggled to understand whether it served the same purpose as WordPiece. I was skeptical since they explicitly list SentencePiece when they say "However, keep in mind that these are not compatible with our tokenization.py library", but if it worked for you guys I will give it a try! Thank you.
+
+____________________________________________________________________________________________________________
+
+BERT:
+
+Transfer learning
+Google published pretrained BERT Model
+take that model, modify, fine tuning training
+
+word embedding: Feature vecotor representation of a word(0.415,-1.6098....,-1.23 etc)
+typical vector length for a word vector- 300 components, model will have set of learned word embeddings 
+take every word in text and convert it into word embedding
+since BERT is pretrained model we have to use their vocab, what's in that vocab, how BERT handles words which aren't in the vocab
+BERT vocb- 30,000 tokens each token has 768 features in its embedding
+feature values dont matter as long as realtive distances are same
+BERT has a fixed vocab, we can't add to them ,it's knowledge is built around the specific words it learned in pre-training
+
+adding words into BERT vocab:
+1 technique- define an unknown token, have an embedding for that token specifically
+
+BERT used word piece model, breaks the word embedding into multiple sub words
+eg: BERT doesn't have the token for EMBEDDING,but it does have for em,bed,ding, so  it breaks into em,bed,ding
+it splits the word into 3 seperate tokens , doesn't combine them
+so what if a bizarre word comes, a subword exists for every character/alphabet
+when a bert tokenizer is run against a word, a ## is added before a subword(# is flag to indicate someting abt the subwords), all subwords start with ## except the first word cause the first word is redundant or unnecessary with the token for the whole word.
+"em ##bed ##ding" 
+bedding
+bed ##ding ----bed is related to bed so it's redundant
+
+
+working withBERT 
+---we use hugging face implemenatation that is build on pytorch
+----work with pretrained bert model(frompre-trained function)---bertbase, bertlarge(big, top accuracy score,cased and uncased(no capitalized words))
+----BERT vocab sorted based on frequency

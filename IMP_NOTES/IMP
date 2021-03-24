@@ -1,0 +1,108 @@
+Most teams are working on Bert pre-training. Here are couple of things to keep in mind. Make sure to explain in your progress report how you deal with these issues:
+
+- Tokenization. The input for Bert training was the original data, with punctuation, stop words etc. Bert was trained using the WordPiece tokenizer applied to the original input.  You should use the same data format to pre-train Bert, otherwise the mismatches may hurt the model. Many of you mentioned different approaches to tokenization. Explain clearly in your 2nd progress report what tokenization approach you use and why. Team working with Dan's data - your data is alreay pre-processed and cleaned up. How does it affect your tokenization?
+
+- Vocabulary. Explain clearly in your 2nd progress report how you extend Bert vocabulary (Especially, for the teams working on Dan's data and Wiki words)
+
+- Pre-training parameters. Explain clearly and in detail your pre-training configuration: how many steps, learning rate, data composition. Bert pre-training may be tricky. If you pre-train too much, Bert may "forget" it's previous knowledge (so called catastrophic forgetting). Try different number of steps in pre-training to make sure you do the smallest amount of pre-training possible.
+
+- Sequence length. Bert expects the input of a fixed length (number of tokens). Explain in your 2nd progress report how you address it for your data. Some of you use data that is longer that the typical Bert sequence lengths. How do you address this? What sequence lengths do you use?
+
+______________________________________________________________________________________________________________________________________________________
+
+Two additional comments on the progress reports:
+
+- The progress reports are individual submissions. Some teams submitted the same report for each team member. I did not penalize it this time but will in the future. Remember, the progress reports will become your final project report. And the final reports are individual. If you submitted the same report as other team member, you have to rewrite the first part of the report in your own words. Your second progress report should have the update first progress report followed by the second progress report.
+
+- I will track more closely what each team member is doing. Starting with the next report, please include a table with the names of each team member and the tasks that they performed. Each team should create that table and fill in. Each team member will include the table in the report.
+
+Please, reach out via email with your questions as you start working on the main part of your projects!
+
+______________________________________________________________________________________________________________________________________________________
+A couple of things about the grades for your 1st progress report.
+
+- I am very glad most of you did a lot of work on the project already! 
+
+- The progress report grade and my comments are focusing on your report. On how you present your work. The current grade is my way to communicate to you what is missing in your current report so that you improve.
+
+- DO NOT resubmit report 1. 
+
+- DO IMPROVE your report 1 and submit with the report 2.
+
+- The progress report 2 should contain BOTH, report 1 and report 2. Remember, in the end all your reports together will the final project report. 
+
+- Put the name of your project at the beginning of your report
+
+- Abstract: Explain the actual goal of the project. For the environmental projects, explain how Dan (our customer) will be using your data. What is iformation are we helping him to get for his work in humanities. Using Bert is not the goal, it is the approach on how we are helping him. For the Bert projects explain what is the actual problem you are solving using the Bert technology.
+
+- Explain briefly related technologies, e.g. Wikification. Since you use the wikified data, you should understand what it is
+
+- Describe the Bert tokenizer. It is special, explain briefly how they work. You should understand that. We had a homework problem for you to look into that.
+
+-  Describe steps of your work with the the tokenizer and Bert vocabulary so that I understand and can do the same. No screen shot, No code. But explain clearly what steps you are performing, what each step does, what issues do you face, how do you deal with the issues.
+_____________________________________________________________________________________________________________________________________________________This is regarding the doubts on the environmental project.
+We have taken all the 'wiki' words from the dataset and placed them in a separate file. We'll be finding the frequency of each 'wiki' word and then compare these words with BERT vocabulary.
+
+Can you please clarify the below doubts.
+
+1. Is it fine if we train the model with these 'wiki' words dataset alone?
+2. Or do we need to do sentence and word tokenization for the entire dataset and train the model with the same too?
+3. Is it necessary to pass the 'wiki' words dataset into a BERT tokenizer? If we are passing it so, can we add prefix and suffix for each wiki word as respectively '[cls]' and '[sep]'
+4. If possible can you please let us know the next steps in this process.
+
+Great questions. I’m not sure whether a model on wiki words alone would give good results because they are sparse and, if isolated, no longer part of sentences in natural language. If I remember correctly from Wednesday, the idea with isolating wiki words was:
+- to count total instances of wiki words vs regular words
+- to count how many separate wiki words there are
+- to list the top 100 most frequent wiki words
+- look up whether some of these wiki words are also in the BERT vocabulary (exact and approximate matches) 
+
+Checking exact matches could work for example like this:
+- make a list of the bert vocabulary
+- make a list of the wiki words 
+- make an empty list for exact matches
+- make an empty list for not matching wikis 
+- for wiki in wikiwordslist
+- - w = wiki.split(“__”)[1].replace(“_”,” “).lower()
+- - if w not in bert_vocabulary:
+- - - no_exact_matches.append(wiki)
+- - else:
+- - - exact_matches.append(wiki) 
+
+Another task one could also do is sorting wiki words by frequency and print the distribution as a line plot (logarithmic scale).
+Team 3  - we discussed that your team WILL NOT train Bert at all. You will take the existing Bert and use the embedding from there. 
+TASK 1 
+Get the counts for each distinct wiki word in Bert vocabulary. Dan provided a nice pseudocode
+
+make a list of the bert vocabulary
+- make a list of the wiki words 
+- make an empty list for exact matches
+- make an empty list for not matching wikis 
+- for wiki in wikiwordslist
+- - w = wiki.split(“__”)[1].replace(“_”,” “).lower()
+- - if w not in bert_vocabulary:
+- - - no_exact_matches.append(wiki)
+- - else:
+- - - exact_matches.append(wiki)
+
+TASK 2
+Analyze the wiki words that are in the Bert vocabulary (exact_matches) in Dan's example.
+
+TASK 3
+Email me you analysis - In Wiki words that are in Bert vocabulary are there names of cities, universities, geographic locations. etc
+
+Then we will discuss the next steps.
+
+Please, get back to me on this tasks on Monday. Do you have any questions or concerns?
+
+As a clarification here are examples of how to provide the counts:
+
+Example 1: Wiki__Aircrew__iiaezlb 
+From this you should extract " Aircrew". You remove the Wikifier specific information at the beginning and at the end.
+
+Example 2: Wiki__Aircrew_member__iiaezlb 
+From this you should extract " Aircrew", "member ". First you remove the Wikifier specific information, then you split on "_". Bert expects only individual words. In other words, Wiki__Aircrew_member__iiaezlb  will give you 2 words  Aircrew, member. For each word you will check if the word is in the Bert vocabulary.
+
+Please, create 2 lists of the wiki words that have matches in the Bert vocabulary. 
+
+List 1: only the wiki words that contain a one single word (Example 1)
+List 2: everything else

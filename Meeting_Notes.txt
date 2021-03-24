@@ -1,0 +1,19 @@
+analayze geo distribtbuon of topics...group all the enities into clusters....show all the wiki word abt space scince, what wiki word are menioned and get the geo locations---visulization tool..
+how can we cluster the wiki words.,,,detect topics in wiki words..
+
+o/p-geo tool...this word in this article comed from this topic..topic id's....using LDA
+
+doc-word pair
+...............provide weights to give significance..
+dimension---topic no-117
+..final report say in ur own words..choose topic distribution for n words..choose a topic from thetha..but when u choose a topic chosose a word
+
+doc/wikiword pair
+bert soend thave topics or clustere...2 options:
+
+vecotr dimenison...which dimensiong  ive the highest value..that is topic for this word in the documens
+5-10 highest varied dimensions
+extarct bert embeddings and cluster them..to get a topic with group of words..
+
+
+doc/context wikiword pair
